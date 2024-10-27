@@ -1,0 +1,32 @@
+/* About.css */
+
+.about-container {
+    max-width: 800px; /* Maximum width of the container */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Internal padding */
+    background-color: #f9f9f9; /* Light background color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+h1 {
+    text-align: center; /* Center the title */
+    margin-bottom: 20px; /* Spacing below the title */
+    color: #333; /* Title text color */
+}
+
+p {
+    line-height: 1.6; /* Increase line spacing for better readability */
+    margin-bottom: 15px; /* Spacing below paragraphs */
+    color: #555; /* Paragraph text color */
+}
+
+/* Optional: Hover style for links (if you have links) */
+a {
+    color: #007BFF; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline link on hover */
+}

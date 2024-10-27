@@ -1,0 +1,68 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Centraliza verticalmente */
+  position: fixed; /* Fixa o nav no topo da tela */
+  top: 0; /* Posiciona no topo */
+  left: 0; /* Começa da esquerda */
+  right: 0; /* Estende até a direita */
+  background-color: #fff; /* Cor de fundo do nav */
+  padding: 10px 20px; /* Espaçamento superior e inferior */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  z-index: 1000; /* Garante que o nav esteja acima de outros elementos */
+}
+
+.navbar-center {
+  display: flex;
+  gap: 10px; /* Espaçamento entre os links */
+}
+
+.app-title {
+  font-size: 1.2em;
+  color: #333;
+  font-weight: bold;
+  text-decoration: none; /* Remove underline */
+}
+
+.app-title:hover {
+  cursor: pointer;
+  color: #555; /* Altere a cor ao passar o mouse se quiser */
+  text-decoration: none; /* Garante que não haja sublinhado no hover */
+}
+
+.nav-link {
+  margin: 0 10px;
+  padding: 5px 10px; /* Padding adicional para aumentar a área clicável */
+  text-decoration: none; /* Remove underline */
+  color: #000; /* Cor do texto */
+  transition: color 0.3s; /* Suaviza a transição de cor */
+}
+
+.nav-link:hover {
+  color: #ccc; /* Cor ao passar o mouse */
+  text-decoration: none; /* Garante que não haja sublinhado no hover */
+}
+
+.active {
+  background-color: #000; /* Fundo para o link ativo */
+  color: #fff; /* Cor do texto para o link ativo */
+}
+
+.logout-button {
+  background: none; /* Remove o fundo padrão */
+  border: none; /* Remove a borda */
+  padding: 5px 10px; /* Adiciona o mesmo padding dos links */
+  color: #000; /* Cor do texto */
+  cursor: pointer; /* Altera o cursor para indicar que é clicável */
+  transition: color 0.3s; /* Suaviza a transição de cor */
+  text-decoration: none; /* Garante que não haja sublinhado */
+}
+
+.logout-button:hover {
+  color: #ccc; /* Cor ao passar o mouse */
+}
+
+.user-info {
+  font-size: 0.9em;
+  color: #555;
+}

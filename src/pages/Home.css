@@ -1,0 +1,40 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    min-height: 100vh; /* Faz a altura mínima da página ser 100% da altura da tela */
+    padding: 20px; /* Espaçamento ao redor do conteúdo */
+    background-color: transparent; /* Fundo transparente */
+  }
+  
+  .home-title {
+    font-family: 'Roboto', sans-serif; 
+    font-size: 2em; /* Tamanho maior para o título */
+    color: #333; /* Cor do texto */
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+    text-align: center; /* Centraliza o texto */
+  }
+  
+  .interest-list {
+    list-style-type: none; /* Remove os marcadores da lista */
+    padding: 0; /* Remove o padding padrão */
+    width: 100%; /* Largura total */
+    max-width: 600px; /* Largura máxima para a lista */
+  }
+  
+  .interest-item {
+    background-color: #f9f9f9; /* Fundo suave para os itens */
+    border: 1px solid #ddd; /* Borda sutil */
+    border-radius: 5px; /* Cantos arredondados */
+    padding: 15px; /* Padding para espaçamento interno */
+    margin: 10px 0; /* Margem entre os itens */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    transition: background-color 0.3s, transform 0.3s; /* Suaviza a transição de cor e transformação */
+  }
+  
+  .interest-item:hover {
+    background-color: #e0e0e0; /* Muda a cor de fundo ao passar o mouse */
+    transform: scale(1.02); /* Aumenta ligeiramente o tamanho ao passar o mouse */
+  }
+  
