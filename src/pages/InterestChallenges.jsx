@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../components/UserContext';
 import './InterestChallenges.css';
@@ -12,6 +12,9 @@ const InterestChallenges = () => {
   const authToken = localStorage.getItem('authToken');
   const { id } = useParams();
   const { user, setUser } = useUser();
+
+  // Referência para o áudio
+  const audioRef = useRef(null);
 
   useEffect(() => {
     const getInterestChallenges = async () => {
@@ -67,6 +70,11 @@ const InterestChallenges = () => {
       )
     );
 
+    // Toca o som de sucesso
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+
     closeModal();
   };
 
@@ -100,6 +108,9 @@ const InterestChallenges = () => {
           </div>
         </div>
       )}
+
+      {/* Elemento de áudio oculto para o som de sucesso */}
+      <audio ref={audioRef} src="/success-sound.mp3" />
     </div>
   );
 };
