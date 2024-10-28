@@ -1,0 +1,13 @@
+.register-form input{
+    margin-bottom: 30px;
+
+}
+
+.register-to-login{
+    margin-top: 20px;
+}
+
+.register-to-login:hover{
+    cursor: pointer;
+    color: black
+}

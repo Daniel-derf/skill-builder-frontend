@@ -1,0 +1,52 @@
+.login-form input{
+    margin-bottom: 30px;
+
+}
+
+.login-title{
+    font-size: 4rem; /* Tamanho do título */
+    color: #333; /* Cor do texto */
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+}
+
+form {
+    background-color: white; /* Fundo do formulário */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 5px; /* Cantos arredondados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    width: 100%;
+    max-width: 350px; /* Largura máxima do formulário, ajustado para evitar alongamento */
+}
+
+.form-control-login {
+    margin-bottom: 15px; /* Espaçamento entre inputs */
+    padding: 10px; /* Espaçamento interno dos inputs */
+    border: 1px solid white; /* Borda branca */
+    border-radius: 3px; /* Cantos arredondados nos inputs */
+    width: 100%; /* Largura total */
+    background-color: #f4f4f4; /* Cor de fundo dos inputs para contraste */
+}
+
+.form-control-login:focus {
+    border-color: #007bff; /* Cor da borda ao focar */
+    outline: none; /* Remove contorno padrão */
+}
+
+.btn {
+    background-color: #007bff; /* Cor do botão */
+    color: white; /* Cor do texto no botão */
+    border: none; /* Remove borda do botão */
+    padding: 10px; /* Espaçamento interno do botão */
+    border-radius: 3px; /* Cantos arredondados no botão */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+
+.btn-login:hover {
+    background-color: #0056b3; /* Cor do botão ao passar o mouse */
+}
+
+.error-message-login {
+    color: red; /* Cor para mensagens de erro */
+    margin-top: 10px; /* Espaçamento acima da mensagem */
+    text-align: center; /* Centraliza a mensagem */
+}

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 
+import './Register.css'
+
 const url = "http://localhost:3001/user/register";
 
 const Register = () => {
@@ -26,46 +28,46 @@ const Register = () => {
         try {
             const response = await httpConfig(user, "POST");
 
-            console.log(response)
-
             if (response.status === 201) {
                 setName("");
                 setEmail("");
                 setPassword("");
                 setConfirmPassword("");
-                setMessage("Registro bem-sucedido! Redirecionando...");
-                setTimeout(() => navigate("/login"), 2000); 
+                setMessage("Registration successful! Redirecting...");
+                setTimeout(() => navigate("/login"), 3000); 
             } else {
-                setMessage(response.message || "Registro falhou. Tente novamente.");
+                setMessage(response.message || "Registration failed. Please try again.");
             }
         } catch (error) {
-            setMessage("Ocorreu um erro: " + error.message);
+            setMessage("An error occurred: " + error.message);
         }
     };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <h1 className="h3 mb-3 fw-normal">Por favor, registre-se</h1>
+    return (<>
+        <h1 className='login-title'>Skill Builder</h1>
+        <form className='register-form' onSubmit={handleSubmit}>
+            <h1 className="h3 mb-3 fw-normal">Register</h1>
 
-            <input className="form-control" placeholder="Nome" required
+            <input className="form-control" placeholder="Name" required
                    value={name} onChange={e => setName(e.target.value)}
             />
 
-            <input type="email" className="form-control" placeholder="Endereço de e-mail" required
+            <input type="email" className="form-control" placeholder="Email Address" required
                    value={email} onChange={e => setEmail(e.target.value)}
             />
 
-            <input type="password" className="form-control" placeholder="Senha" required
+            <input type="password" className="form-control" placeholder="Password" required
                    value={password} onChange={e => setPassword(e.target.value)}
             />  
 
-            <input type="password" className="form-control" placeholder="Confirmar Senha" required
+            <input type="password" className="form-control" placeholder="Confirm Password" required
                    value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
             />
 
-            <button className="w-100 btn btn-lg btn-primary" type="submit">Enviar</button>
-            {message && <p>{message}</p>} {/* Mensagem de feedback */}
-        </form>
+            <button className="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+            <p className='register-to-login' onClick={()=>navigate('/login')}>Return to log in</p>
+            {message && <p>{message}</p>}
+        </form></>
     );
 };
 

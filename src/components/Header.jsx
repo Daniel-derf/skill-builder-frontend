@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from "react-router-dom"; 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useUser } from "./UserContext"; 
 import "./Header.css";
 
@@ -9,6 +9,7 @@ const Header = () => {
   const { user, setUser } = useUser();
   const authToken = localStorage.getItem('authToken');
   const navigate = useNavigate(); 
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
@@ -18,6 +19,7 @@ const Header = () => {
 
   useEffect(() => {
     const getUserInfo = async () => {
+      setIsLoading(true);
       const res = await fetch(url, {
         method: "GET",
         headers: {
@@ -36,6 +38,7 @@ const Header = () => {
         console.log('else');
         console.log('data: ', userData);
       }
+      setIsLoading(false);
     };
 
     if (authToken) {
@@ -43,7 +46,6 @@ const Header = () => {
     }
   }, [authToken, user]); 
 
-  
   return (
     <nav className="navbar">
       <Link to="/home" className="app-title">Skill Builder</Link>
@@ -54,7 +56,7 @@ const Header = () => {
       <div>
         {user && (
           <div className="user-info">
-            {user.name} - XP: {user.xp}
+            {user.name} - XP: {isLoading ? "Loading..." : user.xp}
           </div>
         )}
         <button className="logout-button" onClick={handleLogout}>Logout</button>
