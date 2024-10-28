@@ -13,8 +13,9 @@ const InterestChallenges = () => {
   const { id } = useParams();
   const { user, setUser } = useUser();
 
-  // Referência para o áudio
-  const audioRef = useRef(null);
+  // Referências para os áudios
+  const audioOpenRef = useRef(null);      // Som de abrir o modal
+  const audioCompleteRef = useRef(null);  // Som de completar o desafio
 
   useEffect(() => {
     const getInterestChallenges = async () => {
@@ -44,6 +45,13 @@ const InterestChallenges = () => {
   const openModal = (task) => {
     setSelectedTask(task);
     setModalOpen(true);
+
+    // Toca o som ao abrir o modal
+    if (audioOpenRef.current) {
+      audioOpenRef.current.pause();
+      audioOpenRef.current.currentTime = 0;
+      audioOpenRef.current.play().catch(error => console.error("Erro ao tocar áudio de abertura:", error));
+    }
   };
 
   const closeModal = () => {
@@ -70,9 +78,11 @@ const InterestChallenges = () => {
       )
     );
 
-    // Toca o som de sucesso
-    if (audioRef.current) {
-      audioRef.current.play();
+    // Toca o som de sucesso ao completar o desafio
+    if (audioCompleteRef.current) {
+      audioCompleteRef.current.pause();
+      audioCompleteRef.current.currentTime = 0;
+      audioCompleteRef.current.play().catch(error => console.error("Erro ao tocar áudio de sucesso:", error));
     }
 
     closeModal();
@@ -109,8 +119,9 @@ const InterestChallenges = () => {
         </div>
       )}
 
-      {/* Elemento de áudio oculto para o som de sucesso */}
-      <audio ref={audioRef} src="/success-sound.mp3" />
+      {/* Elementos de áudio ocultos para os sons de abertura e conclusão */}
+      <audio ref={audioOpenRef} src="/select-option.mp3" />
+      <audio ref={audioCompleteRef} src="/success-sound.mp3" />
     </div>
   );
 };

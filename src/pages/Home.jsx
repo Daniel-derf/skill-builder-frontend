@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import withAuth from "../components/withAuth";
 import { useNavigate } from "react-router-dom";
 import './Home.css';
@@ -11,6 +11,7 @@ const Home = () => {
   const navigate = useNavigate();
   
   const authToken = localStorage.getItem('authToken'); 
+  const audioRef = useRef(null); // Referência para o áudio
 
   useEffect(() => {
     const getInterests = async () => {
@@ -40,9 +41,20 @@ const Home = () => {
 
   useEffect(() => {
     if (selectedInterestID !== null) {
-      navigate(`/interest/${selectedInterestID}/task`);
+      if (audioRef.current) {
+        audioRef.current.play(); 
+      }
+
+      setTimeout(() => {
+        navigate(`/interest/${selectedInterestID}/task`);
+      }, 200)
     }
   }, [selectedInterestID, navigate]);
+
+  const handleInterestSelect = (id) => {
+
+    setSelectedInterestID(id)
+  };
 
   return (
     <div className="home-container">
@@ -52,12 +64,15 @@ const Home = () => {
           <li 
             key={interest.id} 
             className="interest-item"
-            onClick={() => setSelectedInterestID(interest.id)} 
+            onClick={() => handleInterestSelect(interest.id)} 
           >
             {interest.name}
           </li>
         ))}
       </ul>
+
+      {/* Elemento de áudio oculto para o som de seleção */}
+      <audio ref={audioRef} src="/select-option.mp3" />
     </div>
   );
 }
