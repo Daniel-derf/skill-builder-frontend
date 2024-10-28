@@ -28,7 +28,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: rgba(255, 255, 255, 0.653);
+  background: linear-gradient(to bottom right, #8ab7e4, #d0d0d0);
 }
 
 h1 {
