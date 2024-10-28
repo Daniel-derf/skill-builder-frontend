@@ -1,65 +1,65 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Centraliza verticalmente */
-  position: fixed; /* Fixa o nav no topo da tela */
-  top: 0; /* Posiciona no topo */
-  left: 0; /* Começa da esquerda */
-  right: 0; /* Estende até a direita */
-  background-color: #fff; /* Cor de fundo do nav */
-  padding: 10px 20px; /* Espaçamento superior e inferior */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  z-index: 1000; /* Garante que o nav esteja acima de outros elementos */
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
 .navbar-center {
   display: flex;
-  gap: 10px; /* Espaçamento entre os links */
+  gap: 10px;
 }
 
 .app-title {
   font-size: 1.2em;
   color: #333;
   font-weight: bold;
-  text-decoration: none; /* Remove underline */
+  text-decoration: none;
 }
 
 .app-title:hover {
   cursor: pointer;
-  color: #555; /* Altere a cor ao passar o mouse se quiser */
-  text-decoration: none; /* Garante que não haja sublinhado no hover */
+  color: #555;
+  text-decoration: none;
 }
 
 .nav-link {
   margin: 0 10px;
-  padding: 5px 10px; /* Padding adicional para aumentar a área clicável */
-  text-decoration: none; /* Remove underline */
-  color: #000; /* Cor do texto */
-  transition: color 0.3s; /* Suaviza a transição de cor */
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #000;
+  transition: color 0.3s;
 }
 
 .nav-link:hover {
-  color: #ccc; /* Cor ao passar o mouse */
-  text-decoration: none; /* Garante que não haja sublinhado no hover */
+  color: #ccc;
+  text-decoration: none;
 }
 
 .active {
-  background-color: #000; /* Fundo para o link ativo */
-  color: #fff; /* Cor do texto para o link ativo */
+  background-color: #000;
+  color: #fff;
 }
 
 .logout-button {
-  background: none; /* Remove o fundo padrão */
-  border: none; /* Remove a borda */
-  padding: 5px 10px; /* Adiciona o mesmo padding dos links */
-  color: #000; /* Cor do texto */
-  cursor: pointer; /* Altera o cursor para indicar que é clicável */
-  transition: color 0.3s; /* Suaviza a transição de cor */
-  text-decoration: none; /* Garante que não haja sublinhado */
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  color: #000;
+  cursor: pointer;
+  transition: color 0.3s;
+  text-decoration: none;
 }
 
 .logout-button:hover {
-  color: #ccc; /* Cor ao passar o mouse */
+  color: #ccc;
 }
 
 .user-info {

@@ -1,52 +1,50 @@
 .tasks-container {
   padding: 20px;
-  max-width: 600px; /* Limita a largura do container */
-  margin: 0 auto; /* Centraliza o container */
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-
 .tasks-title {
-  margin-top: 60px; /* Ajuste este valor conforme necessário */
-  font-size: 24px; /* Ajuste o tamanho da fonte conforme desejado */
-  text-align: center; /* Centraliza o texto */
+  margin-top: 60px;
+  font-size: 24px;
+  text-align: center;
   color: #333;
 }
 
-
 .tasks-list {
-  list-style-type: none; /* Remove os marcadores */
-  padding: 0; /* Remove o padding padrão */
+  list-style-type: none;
+  padding: 0;
 }
 
 .task-item {
-  display: flex; /* Usamos flexbox para alinhar os itens */
-  justify-content: space-between; /* Distribui espaço entre o título e XP */
-  align-items: center; /* Alinha verticalmente */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
-  padding: 15px; /* Adiciona padding para maior área clicável */
-  margin: 10px 0; /* Margem entre as tarefas */
-  border: 1px solid #ddd; /* Borda suave */
-  border-radius: 8px; /* Bordas arredondadas */
-  background-color: #f7f7f7; /* Cor de fundo suave */
-  transition: transform 0.3s, box-shadow 0.3s; /* Transição para efeito hover */
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .task-item:hover {
-  transform: translateY(-2px); /* Eleva ligeiramente o item ao passar o mouse */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adiciona sombra ao passar o mouse */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .task-title {
-  font-weight: bold; /* Destaca o título */
-  color: #444; /* Cor do texto */
+  font-weight: bold;
+  color: #444;
 }
 
 .task-xp {
-  background-color: #4caf50; /* Fundo verde para XP */
-  color: white; /* Cor do texto XP */
-  padding: 5px 10px; /* Padding para o XP */
-  border-radius: 5px; /* Bordas arredondadas */
-  font-weight: bold; /* Destaca o XP */
+  background-color: #4caf50;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 .modal-overlay {
@@ -64,44 +62,43 @@
 .modal-content {
   background-color: white;
   padding: 20px;
-  border-radius: 8px; /* Bordas arredondadas */
-  width: 300px; /* Largura fixa */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra do modal */
-  text-align: center; /* Centraliza o texto */
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .complete-button {
-  background-color: #4caf50; /* Verde */
+  background-color: #4caf50;
   color: white;
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
-  width: 100%; /* Botão ocupa toda a largura */
-  transition: background-color 0.3s; /* Transição suave */
+  width: 100%;
+  transition: background-color 0.3s;
 }
 
 .complete-button:hover {
-  background-color: #45a049; /* Verde escuro */
+  background-color: #45a049;
 }
 
 .close-button {
-  background-color: #f44336; /* Vermelho */
+  background-color: #f44336;
   color: white;
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
-  width: 100%; /* Botão ocupa toda a largura */
-  transition: background-color 0.3s; /* Transição suave */
+  width: 100%;
+  transition: background-color 0.3s;
 }
 
 .close-button:hover {
-  background-color: #d32f2f; /* Vermelho escuro */
+  background-color: #d32f2f;
 }
-
 
 .completed-indicator {
   color: green;
@@ -109,6 +106,6 @@
 }
 
 .task-item button:disabled {
-  background-color: #ccc; /* Cor de fundo para botão desabilitado */
-  cursor: not-allowed; /* Cursor de não permitido */
+  background-color: #ccc;
+  cursor: not-allowed;
 }
