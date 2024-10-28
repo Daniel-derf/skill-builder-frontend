@@ -1,11 +1,9 @@
 import './App.css'
-import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 import Header from './components/Header';
-import Footer from './components/Footer'
 import { UserProvider } from './components/UserContext'; 
 
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 
 // pages
