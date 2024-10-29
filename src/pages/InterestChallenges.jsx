@@ -6,52 +6,50 @@ import backendURL from "../env/data"
 
 const url = `${backendURL}/interest/`
 
+const playAudio = (audioRef) => {
+  if (audioRef.current) {
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+    audioRef.current.play().catch((error) => console.error("Error playing audio:", error));
+  }
+};
+
+const fetchInterestChallenges = async (id, authToken, setTasks) => {
+  try {
+    const res = await fetch(`${url}${id}/task`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: authToken ? `Bearer ${authToken}` : '',
+      },
+    });
+    if (!res.ok) throw new Error('Error fetching challenges');
+    const data = await res.json();
+    setTasks(data.tasks);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
 
 const InterestChallenges = () => {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
-  const authToken = localStorage.getItem('authToken');
   const { id } = useParams();
   const { user, setUser } = useUser();
+  const authToken = localStorage.getItem('authToken');
 
-  const audioOpenRef = useRef(null);      
-  const audioCompleteRef = useRef(null);  
+  const audioOpenRef = useRef(null);
+  const audioCompleteRef = useRef(null);
 
   useEffect(() => {
-    const getInterestChallenges = async () => {
-      try {
-        const res = await fetch(`${url}${id}/task`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: authToken ? `Bearer ${authToken}` : '',
-          },
-        });
-
-        if (!res.ok) {
-          throw new Error('Error');
-        }
-
-        const data = await res.json();
-        setTasks(data.tasks);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    getInterestChallenges();
+    fetchInterestChallenges(id, authToken, setTasks);
   }, [authToken, id]);
 
   const openModal = (task) => {
     setSelectedTask(task);
     setModalOpen(true);
-
-    if (audioOpenRef.current) {
-      audioOpenRef.current.pause();
-      audioOpenRef.current.currentTime = 0;
-      audioOpenRef.current.play().catch(error => console.error("Erro ao tocar áudio de abertura:", error));
-    }
+    playAudio(audioOpenRef);
   };
 
   const closeModal = () => {
@@ -60,68 +58,67 @@ const InterestChallenges = () => {
   };
 
   const completeTask = async (taskID) => {
-    const res = await fetch(`${url}${id}/task/${taskID}/finish`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": authToken ? `Bearer ${authToken}` : "",
-      }
-    });
+    try {
+      const res = await fetch(`${url}${id}/task/${taskID}/finish`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authToken ? `Bearer ${authToken}` : "",
+        },
+      });
+      const data = await res.json();
 
-    const data = await res.json();
-
-    setUser((prevUser) => ({ ...prevUser, xp: prevUser.xp + data.xp }));
-
-    setTasks((prevTasks) =>
-      prevTasks.map((task) => 
-        task.id === taskID ? { ...task, completed: true } : task
-      )
-    );
-
-    if (audioCompleteRef.current) {
-      audioCompleteRef.current.pause();
-      audioCompleteRef.current.currentTime = 0;
-      audioCompleteRef.current.play().catch(error => console.error("Error: ", error));
+      setUser((prevUser) => ({ ...prevUser, xp: prevUser.xp + data.xp }));
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === taskID ? { ...task, completed: true } : task
+        )
+      );
+      playAudio(audioCompleteRef);
+    } catch (error) {
+      console.error("Error completing task:", error);
+    } finally {
+      closeModal();
     }
-
-    closeModal();
   };
 
   return (
     <div className="tasks-container">
       <h1 className="tasks-title">Challenges</h1>
-      <ul className="tasks-list">
-        {tasks.map((task) => (
-          <li className="task-item" key={task.id} onClick={() => openModal(task)}>
-            <span className="task-title">
-              {task.title} - {task.xp}
-              {task.completed && <span className="completed-indicator"> OK</span>}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-      {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>{selectedTask.title}</h2>
-            <p>{selectedTask.description}</p>
-            {!selectedTask.completed && 
-              <button
-                onClick={() => completeTask(selectedTask.id)}
-                className="complete-button"
-              >
-                Complete Challenge
-              </button>}
-            <button onClick={closeModal} className="close-button">Close</button>
-          </div>
-        </div>
-      )}
-
+      <TaskList tasks={tasks} onTaskSelect={openModal} />
+      {isModalOpen && <TaskModal task={selectedTask} onComplete={completeTask} onClose={closeModal} />}
       <audio ref={audioOpenRef} src="/select-option.mp3" />
       <audio ref={audioCompleteRef} src="/success-sound.mp3" />
     </div>
   );
 };
+
+const TaskList = ({ tasks, onTaskSelect }) => (
+  <ul className="tasks-list">
+    {tasks.map((task) => (
+      <li className="task-item" key={task.id} onClick={() => onTaskSelect(task)}>
+        <span className="task-title">
+          {task.title} - {task.xp}
+          {task.completed && <span className="completed-indicator"> OK</span>}
+        </span>
+      </li>
+    ))}
+  </ul>
+);
+
+const TaskModal = ({ task, onComplete, onClose }) => (
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <h2>{task.title}</h2>
+      <p>{task.description}</p>
+      {!task.completed && (
+        <button onClick={() => onComplete(task.id)} className="complete-button">
+          Complete Challenge
+        </button>
+      )}
+      <button onClick={onClose} className="close-button">Close</button>
+    </div>
+  </div>
+);
 
 export default InterestChallenges;

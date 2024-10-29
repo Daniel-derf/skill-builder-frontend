@@ -2,58 +2,53 @@ import React, { useEffect, useState, useRef } from "react";
 import withAuth from "../components/withAuth";
 import { useNavigate } from "react-router-dom";
 import './Home.css';
-import backendURL from "../env/data"
+import backendURL from "../env/data";
 
-const url = `${backendURL}/interest`
+const url = `${backendURL}/interest`;
+
+const playAudio = (audioRef) => {
+  if (audioRef.current) {
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+    audioRef.current.play().catch((error) => console.error("Error playing audio:", error));
+  }
+};
+
+const fetchInterests = async (authToken, setInterests) => {
+  try {
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: authToken ? `Bearer ${authToken}` : "",
+      },
+    });
+
+    if (!res.ok) throw new Error("Error fetching interests");
+    const data = await res.json();
+    setInterests(data.interests);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
 const Home = () => {
   const [interests, setInterests] = useState([]); 
   const [selectedInterestID, setSelectedInterestID] = useState(null);
   const navigate = useNavigate();
-  
-  const authToken = localStorage.getItem('authToken'); 
+  const authToken = localStorage.getItem("authToken"); 
   const audioRef = useRef(null);
 
   useEffect(() => {
-    const getInterests = async () => {
-      try {
-        const res = await fetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": authToken ? `Bearer ${authToken}` : "",
-          },
-        });
-
-        if (!res.ok) {
-          throw new Error('Erro ao buscar interesses');
-        }
-        const data = await res.json();
-        setInterests(data.interests);
-      } catch (error) {
-        console.error('Erro:', error);
-      }
-    };
-
-    getInterests();
+    fetchInterests(authToken, setInterests);
   }, [authToken]);
 
   useEffect(() => {
     if (selectedInterestID !== null) {
-      if (audioRef.current) {
-        audioRef.current.play(); 
-      }
-
-      setTimeout(() => {
-        navigate(`/interest/${selectedInterestID}/task`);
-      }, 200)
+      playAudio(audioRef);
+      setTimeout(() => navigate(`/interest/${selectedInterestID}/task`), 200);
     }
   }, [selectedInterestID, navigate]);
-
-  const handleInterestSelect = (id) => {
-
-    setSelectedInterestID(id)
-  };
 
   return (
     <div className="home-container">
@@ -63,13 +58,12 @@ const Home = () => {
           <li 
             key={interest.id} 
             className="interest-item"
-            onClick={() => handleInterestSelect(interest.id)} 
+            onClick={() => setSelectedInterestID(interest.id)} 
           >
             {interest.name}
           </li>
         ))}
       </ul>
-
       <audio ref={audioRef} src="/select-option.mp3" />
     </div>
   );

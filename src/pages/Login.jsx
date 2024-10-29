@@ -2,36 +2,33 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import './Login.css';
-import backendURL from "../env/data"
+import backendURL from "../env/data";
 
-const url = `${backendURL}/user/login`
-
+const url = `${backendURL}/user/login`;
 
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const { httpConfig } = useFetch(url);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setCredentials((prev) => ({ ...prev, [name]: value }));
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
 
-        const user = {
-            email,
-            password,
-        };
-    
         try {
-            const response = await httpConfig(user, "POST");
+            const response = await httpConfig(credentials, "POST");
 
             if (response.status === 200) {
-                setEmail("");
-                setPassword("");
-                setTimeout(() => navigate("/home"), 0); 
+                setCredentials({ email: '', password: '' });
+                navigate("/home");
             } else {
                 setMessage(response.message || "Login failed.");
             }
@@ -51,18 +48,35 @@ const Login = () => {
                 <form className='login-form' onSubmit={handleSubmit}>
                     <h1 className="h3 mb-3 fw-normal">Log In</h1>
 
-                    <input type="email" className="form-control" placeholder="Email Address" required
-                           value={email} onChange={e => setEmail(e.target.value)}
+                    <input 
+                        type="email" 
+                        className="form-control" 
+                        placeholder="Email Address" 
+                        name="email"
+                        value={credentials.email} 
+                        onChange={handleInputChange} 
+                        required 
                     />
 
-                    <input type="password" className="form-control" placeholder="Password" required
-                           value={password} onChange={e => setPassword(e.target.value)}
+                    <input 
+                        type="password" 
+                        className="form-control" 
+                        placeholder="Password" 
+                        name="password"
+                        value={credentials.password} 
+                        onChange={handleInputChange} 
+                        required 
                     />  
 
                     <button className="w-100 btn btn-lg btn-primary" type="submit">
                         Submit
                     </button>
-                    <p className='register-to-login' onClick={()=>navigate('/register')}>Register</p>
+                    <p 
+                        className='register-to-login' 
+                        onClick={() => navigate('/register')}
+                    >
+                        Register
+                    </p>
                     {message && <p>{message}</p>}
                 </form>
             )}

@@ -22,7 +22,7 @@ export const useAuthStatus = (url) => {
                     setIsLoggedIn(false);
                 }
             } catch (error) {
-                console.error("Erro ao verificar status de autenticação:", error);
+                console.error("Error on verifying auth:", error);
                 setIsLoggedIn(false);
             } 
         };
