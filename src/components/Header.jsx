@@ -34,11 +34,7 @@ const Header = () => {
         if (JSON.stringify(userData.user) !== JSON.stringify(user)) {
           setUser(userData.user);
         }
-      } else {
-        const userData = await res.json();
-        console.log('else');
-        console.log('data: ', userData);
-      }
+      } 
       setIsLoading(false);
     };
 

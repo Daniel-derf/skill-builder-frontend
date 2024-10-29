@@ -28,9 +28,7 @@ const Home = () => {
         if (!res.ok) {
           throw new Error('Erro ao buscar interesses');
         }
-
         const data = await res.json();
-        console.log('interests:', data);
         setInterests(data.interests);
       } catch (error) {
         console.error('Erro:', error);
