@@ -70,7 +70,6 @@ const Home = () => {
         ))}
       </ul>
 
-      {/* Elemento de áudio oculto para o som de seleção */}
       <audio ref={audioRef} src="/select-option.mp3" />
     </div>
   );

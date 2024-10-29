@@ -81,7 +81,7 @@ const InterestChallenges = () => {
     if (audioCompleteRef.current) {
       audioCompleteRef.current.pause();
       audioCompleteRef.current.currentTime = 0;
-      audioCompleteRef.current.play().catch(error => console.error("Erro ao tocar áudio de sucesso:", error));
+      audioCompleteRef.current.play().catch(error => console.error("Error: ", error));
     }
 
     closeModal();
@@ -118,7 +118,6 @@ const InterestChallenges = () => {
         </div>
       )}
 
-      {/* Elementos de áudio ocultos para os sons de abertura e conclusão */}
       <audio ref={audioOpenRef} src="/select-option.mp3" />
       <audio ref={audioCompleteRef} src="/success-sound.mp3" />
     </div>
