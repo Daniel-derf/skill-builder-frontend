@@ -57,7 +57,7 @@ const InterestChallenges = () => {
     setSelectedTask(null);
   };
 
-  const completeTask = async (taskID) => {
+  const completeChallenge = async (taskID) => {
     try {
       const res = await fetch(`${url}${id}/task/${taskID}/finish`, {
         method: "POST",
@@ -76,7 +76,7 @@ const InterestChallenges = () => {
       );
       playAudio(audioCompleteRef);
     } catch (error) {
-      console.error("Error completing task:", error);
+      console.error("Error completing challenge:", error);
     } finally {
       closeModal();
     }
@@ -85,15 +85,15 @@ const InterestChallenges = () => {
   return (
     <div className="tasks-container">
       <h1 className="tasks-title">Challenges</h1>
-      <TaskList tasks={tasks} onTaskSelect={openModal} />
-      {isModalOpen && <TaskModal task={selectedTask} onComplete={completeTask} onClose={closeModal} />}
+      <ChallengesList tasks={tasks} onTaskSelect={openModal} />
+      {isModalOpen && <ChallengeModal task={selectedTask} onComplete={completeChallenge} onClose={closeModal} />}
       <audio ref={audioOpenRef} src="/select-option.mp3" />
       <audio ref={audioCompleteRef} src="/success-sound.mp3" />
     </div>
   );
 };
 
-const TaskList = ({ tasks, onTaskSelect }) => (
+const ChallengesList = ({ tasks, onTaskSelect }) => (
   <ul className="tasks-list">
     {tasks.map((task) => (
       <li className="task-item" key={task.id} onClick={() => onTaskSelect(task)}>
@@ -106,7 +106,7 @@ const TaskList = ({ tasks, onTaskSelect }) => (
   </ul>
 );
 
-const TaskModal = ({ task, onComplete, onClose }) => (
+const ChallengeModal = ({ task, onComplete, onClose }) => (
   <div className="modal-overlay">
     <div className="modal-content">
       <h2>{task.title}</h2>
