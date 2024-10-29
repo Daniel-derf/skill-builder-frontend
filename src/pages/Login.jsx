@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import './Login.css';
+import backendURL from "../env/data"
 
-const url = "http://localhost:3001/user/login";
+const url = `${backendURL}/user/login`
+
 
 const Login = () => {
     const [email, setEmail] = useState('');

@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../components/UserContext';
 import './InterestChallenges.css';
+import backendURL from "../env/data"
 
-const url = 'http://localhost:3001/interest/';
+const url = `${backendURL}/interest/`
+
 
 const InterestChallenges = () => {
   const [tasks, setTasks] = useState([]);
@@ -13,9 +15,8 @@ const InterestChallenges = () => {
   const { id } = useParams();
   const { user, setUser } = useUser();
 
-  // Referências para os áudios
-  const audioOpenRef = useRef(null);      // Som de abrir o modal
-  const audioCompleteRef = useRef(null);  // Som de completar o desafio
+  const audioOpenRef = useRef(null);      
+  const audioCompleteRef = useRef(null);  
 
   useEffect(() => {
     const getInterestChallenges = async () => {
@@ -46,7 +47,6 @@ const InterestChallenges = () => {
     setSelectedTask(task);
     setModalOpen(true);
 
-    // Toca o som ao abrir o modal
     if (audioOpenRef.current) {
       audioOpenRef.current.pause();
       audioOpenRef.current.currentTime = 0;
@@ -78,7 +78,6 @@ const InterestChallenges = () => {
       )
     );
 
-    // Toca o som de sucesso ao completar o desafio
     if (audioCompleteRef.current) {
       audioCompleteRef.current.pause();
       audioCompleteRef.current.currentTime = 0;

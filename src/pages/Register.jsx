@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
-
+import backendURL from "../env/data"
 import './Register.css'
 
-const url = "http://localhost:3001/user/register";
+const url = `${backendURL}/user/register`
+
 
 const Register = () => {
     const [name, setName] = useState('');

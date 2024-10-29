@@ -2,8 +2,9 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useUser } from "./UserContext"; 
 import "./Header.css";
+import backendURL from "../env/data"
 
-const url = 'http://localhost:3001/user/me';
+const url = `${backendURL}/user/me`;
 
 const Header = () => {
   const { user, setUser } = useUser();

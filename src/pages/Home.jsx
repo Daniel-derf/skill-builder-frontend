@@ -2,8 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import withAuth from "../components/withAuth";
 import { useNavigate } from "react-router-dom";
 import './Home.css';
+import backendURL from "../env/data"
 
-const url = 'http://localhost:3001/interest';
+const url = `${backendURL}/interest`
 
 const Home = () => {
   const [interests, setInterests] = useState([]); 
@@ -11,7 +12,7 @@ const Home = () => {
   const navigate = useNavigate();
   
   const authToken = localStorage.getItem('authToken'); 
-  const audioRef = useRef(null); // Referência para o áudio
+  const audioRef = useRef(null);
 
   useEffect(() => {
     const getInterests = async () => {
