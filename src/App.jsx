@@ -25,6 +25,7 @@ function App() {
       <UserProvider>
       {!isAuthPage && <Header />}
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path='/interest/:id/task' element={<InterestChallenges/>} />
           <Route path="/login" element={<Login />} />
