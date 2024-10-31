@@ -32,6 +32,7 @@ const Header = () => {
         if (res.ok) {
           const userData = await res.json();
           if (JSON.stringify(userData.user) !== JSON.stringify(user)) {
+            console.log(userData)
             setUser(userData.user);
           }
         }
@@ -54,7 +55,7 @@ const Header = () => {
       <div>
         {user && (
           <div className="user-info">
-            {user.name} - XP: {isLoading ? "Loading..." : user.xp}
+            {user.name} - Level: {isLoading ? "Loading..." : user.level}  XP: {isLoading ? "Loading..." : user.xp} 
           </div>
         )}
         <button className="logout-button" onClick={handleLogout}>Logout</button>
