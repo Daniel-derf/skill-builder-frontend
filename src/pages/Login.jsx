@@ -4,7 +4,7 @@ import { useFetch } from '../hooks/useFetch';
 import './Login.css';
 import backendURL from "../env/data";
 
-const url = `${backendURL}/user/login`;
+const url = `${backendURL}/login`;
 
 const Login = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });

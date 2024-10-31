@@ -6,29 +6,6 @@ import backendURL from "../env/data";
 
 const url = `${backendURL}/user/me`;
 
-const fetchUserInfo = async (authToken, user, setUser, setIsLoading) => {
-  setIsLoading(true);
-  try {
-    const res = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: authToken ? `Bearer ${authToken}` : "",
-      },
-    });
-    if (res.ok) {
-      const userData = await res.json();
-      if (JSON.stringify(userData.user) !== JSON.stringify(user)) {
-        setUser(userData.user);
-      }
-    }
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-  } finally {
-    setIsLoading(false);
-  }
-};
-
 const Header = () => {
   const { user, setUser } = useUser();
   const authToken = localStorage.getItem("authToken");
@@ -42,6 +19,28 @@ const Header = () => {
   };
 
   useEffect(() => {
+    const fetchUserInfo = async (authToken, user, setUser, setIsLoading) => {
+      setIsLoading(true);
+      try {
+        const res = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authToken ? `Bearer ${authToken}` : "",
+          },
+        });
+        if (res.ok) {
+          const userData = await res.json();
+          if (JSON.stringify(userData.user) !== JSON.stringify(user)) {
+            setUser(userData.user);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
     if (authToken) fetchUserInfo(authToken, user, setUser, setIsLoading);
   }, [authToken, user]); 
 

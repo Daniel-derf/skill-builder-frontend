@@ -4,7 +4,7 @@ import { useFetch } from '../hooks/useFetch';
 import backendURL from "../env/data";
 import './Register.css';
 
-const url = `${backendURL}/user/register`;
+const url = `${backendURL}/register`;
 
 const Register = () => {
     const [formData, setFormData] = useState({

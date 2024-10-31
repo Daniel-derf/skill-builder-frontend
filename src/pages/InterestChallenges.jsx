@@ -14,23 +14,6 @@ const playAudio = (audioRef) => {
   }
 };
 
-const fetchInterestChallenges = async (id, authToken, setTasks) => {
-  try {
-    const res = await fetch(`${url}${id}/task`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: authToken ? `Bearer ${authToken}` : '',
-      },
-    });
-    if (!res.ok) throw new Error('Error fetching challenges');
-    const data = await res.json();
-    setTasks(data.tasks);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
-
 const InterestChallenges = () => {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
@@ -43,6 +26,23 @@ const InterestChallenges = () => {
   const audioCompleteRef = useRef(null);
 
   useEffect(() => {
+    const fetchInterestChallenges = async (id, authToken, setTasks) => {
+      try {
+        const res = await fetch(`${url}${id}/task`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: authToken ? `Bearer ${authToken}` : '',
+          },
+        });
+        if (!res.ok) throw new Error('Error fetching challenges');
+        const data = await res.json();
+        setTasks(data.tasks);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
     fetchInterestChallenges(id, authToken, setTasks);
   }, [authToken, id]);
 

@@ -14,24 +14,6 @@ const playAudio = (audioRef) => {
   }
 };
 
-const fetchInterests = async (authToken, setInterests) => {
-  try {
-    const res = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: authToken ? `Bearer ${authToken}` : "",
-      },
-    });
-
-    if (!res.ok) throw new Error("Error fetching interests");
-    const data = await res.json();
-    setInterests(data.interests);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
-
 const Home = () => {
   const [interests, setInterests] = useState([]); 
   const [selectedInterestID, setSelectedInterestID] = useState(null);
@@ -40,6 +22,23 @@ const Home = () => {
   const audioRef = useRef(null);
 
   useEffect(() => {
+    const fetchInterests = async (authToken, setInterests) => {
+      try {
+        const res = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authToken ? `Bearer ${authToken}` : "",
+          },
+        });
+    
+        if (!res.ok) throw new Error("Error fetching interests");
+        const data = await res.json();
+        setInterests(data.interests);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
     fetchInterests(authToken, setInterests);
   }, [authToken]);
 
